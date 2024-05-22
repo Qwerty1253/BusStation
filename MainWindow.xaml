@@ -1,0 +1,265 @@
+﻿<Window x:Class="BusStation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:BusStation"
+        Title="Автовокзал" Height="768" Width="1366"
+        Background="#282c34"
+        Foreground="#dedded"
+        FontFamily="pack://application:,,,/#Accuratist">
+    <Window.Resources>
+
+        <Style x:Key="SortButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="18"/>
+            <Setter Property="Height" Value="16"/>
+            <Setter Property="Margin" Value="5 0 5 0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="Foreground" Value="#dedded"/>
+            <Setter Property="Cursor" Value="Hand"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Content="{TemplateBinding Content}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="#3e444e"/>
+            <Setter Property="Foreground" Value="#dedded"/>
+            <Setter Property="BorderBrush" Value="#606770"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="local:PlaceholderTextBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="#3e444e"/>
+            <Setter Property="Foreground" Value="#dedded"/>
+            <Setter Property="BorderBrush" Value="#606770"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="ActiveTextColor" Value="#dedded"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="14 5 14 5"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Background" Value="#4c566a"/>
+            <Setter Property="Foreground" Value="#e1e1e1"/>
+            <Setter Property="BorderBrush" Value="#606770"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="21"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#dedded"/>
+            <Setter Property="FontSize" Value="21"/>
+        </Style>
+        <Style TargetType="ListView">
+            <Setter Property="Background" Value="#3d434f"/>
+            <Setter Property="Foreground" Value="#e1e1e1"/>
+            <Setter Property="BorderBrush" Value="#606770"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style TargetType="ListViewItem">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="10,15"/>
+            <Setter Property="Background" Value="#4c566a"/>
+            <Setter Property="Foreground" Value="#e1e1e1"/>
+            <Setter Property="BorderBrush" Value="#606770"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#5c6a82"/>
+                </Trigger>
+            </Style.Triggers>
+            
+        </Style>
+        <Style TargetType="GridViewColumnHeader">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridViewColumnHeader">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#3e444e"/>
+            <Setter Property="Foreground" Value="#c2c2c2"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="BorderBrush" Value="#606770"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="0 2 0 0"/>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Left" Width="300" Background="#3d434f" Margin="10 10 0 10">
+            <Label Content="Управління рейсами" FontSize="20" Foreground="#dedded" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,10"/>
+
+            <Label Content="Номер автобуса:"/>
+            <TextBox x:Name="BusNumberTextBox"/>
+
+            <Label Content="Відправлення:"/>
+            <TextBox x:Name="DeparturePointTextBox"/>
+
+            <Label Content="Призначення:"/>
+            <TextBox x:Name="DestinationPointTextBox"/>
+
+            <Label Content="Час відправлення:"/>
+            <local:PlaceholderTextBox x:Name="DepartureTimeTextBox" PlaceholderText="hh:mm dd.mm.yyyy"/>
+
+            <Label Content="Час призначення:"/>
+            <local:PlaceholderTextBox x:Name="ArrivalTimeTextBox" PlaceholderText="hh:mm dd.mm.yyyy"/>
+            <Label Content="Ціна квитка:"/>
+            <TextBox x:Name="TicketPriceTextBox"/>
+
+            <Button x:Name="AddRouteButton" Content="Додати рейс" Click="AddRouteButton_Click"/>
+            <Button x:Name="RemoveRouteButton" Content="Видалити рейс" Click="RemoveRouteButton_Click"/>
+        </StackPanel>
+
+        <ListView x:Name="BusRoutesListView" DockPanel.Dock="Right" Margin="10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Номер автобуса" Width="Auto">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Номер автобуса" Margin="2"/>
+                                    <Button Style="{StaticResource SortButtonStyle}" Content="&#xE96D;" Click="SortByBusNumberAsc"/>
+                                    <Button Style="{StaticResource SortButtonStyle}" Content="&#xE96E;" Click="SortByBusNumberDesc"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding BusNumber}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Відправлення" Width="Auto">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Відправлення" Margin="2"/>
+                                    <Button Style="{StaticResource SortButtonStyle}" Content="&#xE96D;" Click="SortByDeparturePointAsc"/>
+                                    <Button Style="{StaticResource SortButtonStyle}" Content="&#xE96E;" Click="SortByDeparturePointDesc"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DeparturePoint}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Призначення" Width="Auto">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Призначення" Margin="2"/>
+                                    <Button Style="{StaticResource SortButtonStyle}" Content="&#xE96D;" Click="SortByDestinationPointAsc"/>
+                                    <Button Style="{StaticResource SortButtonStyle}" Content="&#xE96E;" Click="SortByDestinationPointDesc"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DestinationPoint}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Час відправлення" Width="Auto">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Час відправлення" Margin="2"/>
+                                    <Button Style="{StaticResource SortButtonStyle}" Content="&#xE96D;" Click="SortByDepartureTimeAsc"/>
+                                    <Button Style="{StaticResource SortButtonStyle}" Content="&#xE96E;" Click="SortByDepartureTimeDesc"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DepartureTime, StringFormat='HH:mm dd.MM.yyyy'}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Час призначення" Width="Auto">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Час призначення" Margin="2"/>
+                                    <Button Style="{StaticResource SortButtonStyle}" Content="&#xE96D;" Click="SortByArrivalTimeAsc"/>
+                                    <Button Style="{StaticResource SortButtonStyle}" Content="&#xE96E;" Click="SortByArrivalTimeDesc"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ArrivalTime, StringFormat='HH:mm dd.MM.yyyy'}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Ціна квитка" Width="Auto">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Ціна квитка" Margin="2"/>
+                                    <Button Style="{StaticResource SortButtonStyle}" Content="&#xE96D;" Click="SortByTicketPriceAsc"/>
+                                    <Button Style="{StaticResource SortButtonStyle}" Content="&#xE96E;" Click="SortByTicketPriceDesc"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding TicketPrice}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </DockPanel>
+</Window>
